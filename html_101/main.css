@@ -12,3 +12,19 @@ p {
 .blue {
 	background-color: blue;
 }
+
+* {
+  outline: 1px solid orange;
+}
+
+.container {
+  padding: 5%;
+}
+
+.first-example {
+  width: 500px;  
+}
+
+.half {
+  width: 50%;
+}
