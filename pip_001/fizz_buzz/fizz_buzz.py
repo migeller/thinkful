@@ -4,23 +4,18 @@ import sys
 
 def modulo(x, y):
 	""" Determines if we can divide x from y evenly. """
-	if x % y == 0:
-		return True
-	else:
-		return False
+	return x % y == 0
 
 def stepper(limit=100):
 	""" Steps through from 1 to limit and prints out a fizzbuzz sequence. """
 	print "Our Upper Limit is %d! Let's go!" % limit
 	for n in xrange(1, limit + 1):
-	# 	if modulo(n, 5) and modulo(n, 3):
-	# 		print "fizzbuzz"
 		if modulo(n, 3):
 			print "fizz",
 			if modulo(n, 5):
-				print "buzz"
+				print "\b-buzz"
 			else:
-				print ""
+				print "\b"
 		elif modulo(n, 5):
 			print "buzz"
 		else:
