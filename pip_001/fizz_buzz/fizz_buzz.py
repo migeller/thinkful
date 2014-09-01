@@ -2,7 +2,7 @@
 
 upper_limit = 100
 
-for n in range(1, upper_limit + 1):
+for n in xrange(1, upper_limit + 1):
 	if n % 3 == 0 and n % 5 == 0:
 		print "fizzbuzz"
 	elif n % 3 == 0:
