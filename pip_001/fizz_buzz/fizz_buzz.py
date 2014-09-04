@@ -1,30 +1,35 @@
 #!/usr/bin/env python
 
-upper_limit = 0
-i = ""
-
 import sys
 
-try:
-	i = sys.argv[1]
-except IndexError:
-	print "I see you didn't provide an Upper Limit as an argument."
-	
-while upper_limit == 0:
+def modulo(x, y):
+	""" Determines if we can divide x from y evenly. """
+	return x % y == 0
+
+def stepper(limit = 100):
+	""" Steps through from 1 to limit and prints out a fizzbuzz sequence. """
+	print "Our Upper Limit is %d! Let's go!" % limit
+	for n in xrange(1, limit + 1):
+		if modulo(n, 3):
+			print "fizz",
+			if modulo(n, 5):
+				print "\b-buzz"
+			else:
+				print "\b"
+		elif modulo(n, 5):
+			print "buzz"
+		else:
+			print n
+
+if __name__ == '__main__':
 	try:
-		upper_limit = int(i)
-	except ValueError:
-		print "I need an integer here. Help me out."
-		i = raw_input("Please enter an Upper Limit now: ")
-
-print "Our Upper Limit is %d! Let's go!" % upper_limit
-
-for n in xrange(1, upper_limit + 1):
-	if n % 3 == 0 and n % 5 == 0:
-		print "fizzbuzz"
-	elif n % 3 == 0:
-		print "fizz"
-	elif n % 5 == 0:
-		print "buzz"
+		i = sys.argv[1]
+	except IndexError:
+		stepper()
 	else:
-		print n
+		try:
+			limit = int(i)
+		except ValueError:
+			stepper()
+		else:
+			stepper(limit)
