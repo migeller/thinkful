@@ -24,7 +24,7 @@ reliant = Manufacturer("Reliant", .15)
 forward_motion = Manufacturer("Forward Motion", .25)
 
 # Shop
-mels_bikes = Shop("Mel's Bikes")
+mels_bikes = Shop("Mel's Bikes", .2)
 
 # Customer
 matt = Customer("Matt", 1000)

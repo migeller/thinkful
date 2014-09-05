@@ -105,9 +105,6 @@ class Shop(Business):
 
 	"""Defines a bicycle shop"""
 
-	def __init__(self, name, markup = .2, inventory=[]):
-		super(Shop, self).__init__(name, markup, inventory)
-
 
 class Customer(object):
 
