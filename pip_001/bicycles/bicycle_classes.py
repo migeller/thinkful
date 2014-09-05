@@ -18,7 +18,7 @@ class Frame(Component):
 
 	"""Defines a bicycle frame"""
 
-	def __init__(self, name, itemid, weight, cost, material = 'steel'):
+	def __init__(self, name, itemid, weight, cost, material = "steel"):
 		self.material = material
 		super(Frame, self).__init__(name, itemid, weight, cost)
 
@@ -27,7 +27,7 @@ class Model(object):
 
 	"""Defines a bicycle model"""
 
-	def __init__(self, name, frame, wheel, manufacturer = ""):
+	def __init__(self, name, frame, wheel, manufacturer = None):
 		self.name = name
 		self.frame = frame
 		self.wheel = wheel
@@ -41,28 +41,28 @@ class Business(object):
 
 	"""Defines a generic business"""
 
-	def __init__(self, name, markup, inventory = []):
+	def __init__(self, name, markup, inventory = None):
 		self.name = name
 		self.markup = markup
-		if inventory != []:
-			self.inventory = inventory
-		else:
+		if inventory is None:
 			self.inventory = []
+		else:
+			self.inventory = inventory
 		self.profit = 0
 
 	def price(self, model):
 		if model in self.inventory:
 			return model.cost * (1 + self.markup)
 
-	def catalog(self, models = (), personal = "\b"):
-		if not models:
+	def catalog(self, models = None, personal = "\b"):
+		if models is None:
 			models = self.inventory
 		if personal != "\b":
 			personal = "just for " + personal
 		print ""
 		print "Here's what we've got for sale %s at %s:" % (personal, self.name)
 		for model in models:
-			print "%s: %s %s, total weight: %dg, price: %.2f" % (model.itemid, model.manufacturer, model.name, model.weight, self.price(model))
+			print "%s: %s %s, total weight: %dg, material: %s, price: %.2f" % (model.itemid, model.manufacturer, model.name, model.weight, model.frame.material, self.price(model))
 
 	def buy(self, seller, model):
 		if seller.sell(model):

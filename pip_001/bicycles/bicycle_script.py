@@ -31,6 +31,12 @@ matt = Customer("Matt", 1000)
 drew = Customer("Drew", 500)
 lisa = Customer("Lisa", 200)
 
+# Make sure markups are right
+print ""
+print "%s markup is %.2f" % (mels_bikes.name, mels_bikes.markup)
+print "%s markup is %.2f" % (reliant.name, reliant.markup)
+print "%s markup is %.2f" % (forward_motion.name, forward_motion.markup)
+
 # Make Reliant Models
 r_work_order = [elite, rugged, get_around]
 
@@ -53,7 +59,9 @@ purchase_order = [(reliant, elite), (reliant, rugged), (reliant, get_around), (f
 for order in purchase_order:
 	mels_bikes.buy(order[0], order[1])
 
-# Conduct Audit of Mel's Bikes
+# Conduct post purchase order audit
+reliant.audit()
+forward_motion.audit()
 mels_bikes.audit()
 
 # Customers Browse Mel's Bikes
@@ -72,8 +80,3 @@ lisa.buy(mels_bikes, not_so_fine)
 
 # Final Audit of Mel's Bikes
 mels_bikes.audit()
-
-# Make sure markups are right
-print mels_bikes.markup
-print reliant.markup
-print forward_motion.markup
