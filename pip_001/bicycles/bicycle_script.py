@@ -72,3 +72,8 @@ lisa.buy(mels_bikes, not_so_fine)
 
 # Final Audit of Mel's Bikes
 mels_bikes.audit()
+
+# Make sure markups are right
+print mels_bikes.markup
+print reliant.markup
+print forward_motion.markup

@@ -41,10 +41,13 @@ class Business(object):
 
 	"""Defines a generic business"""
 
-	def __init__(self, name, markup):
+	def __init__(self, name, markup, inventory = []):
 		self.name = name
 		self.markup = markup
-		self.inventory = []
+		if inventory != []:
+			self.inventory = inventory
+		else:
+			self.inventory = []
 		self.profit = 0
 
 	def price(self, model):
@@ -91,10 +94,6 @@ class Manufacturer(Business):
 
 	"""Defines a bicycle manufacturer"""
 
-	def __init__(self, name, markup):
-		self.inventory = []
-		super(Manufacturer, self).__init__(name, markup)
-
 	def make(self, model):
 		model.manufacturer = self.name
 		self.inventory.append(model)
@@ -106,9 +105,8 @@ class Shop(Business):
 
 	"""Defines a bicycle shop"""
 
-	def __init__(self, name, markup = .2):
-		self.inventory = []
-		super(Shop, self).__init__(name, markup)
+	def __init__(self, name, markup = .2, inventory=[]):
+		super(Shop, self).__init__(name, markup, inventory)
 
 
 class Customer(object):
