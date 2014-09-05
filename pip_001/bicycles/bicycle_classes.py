@@ -7,7 +7,7 @@ class Component(object):
 		self.itemid = itemid
 		self.weight = weight
 		self.cost = cost
-		
+
 
 class Wheel(Component):
 
@@ -35,7 +35,7 @@ class Model(object):
 		self.itemid = self.frame.itemid + '-' + self.wheel.itemid
 		self.weight = (2 * self.wheel.weight) + self.frame.weight
 		self.cost = (2 * self.wheel.cost) + self.frame.cost
-		
+
 
 class Business(object):
 
@@ -44,14 +44,15 @@ class Business(object):
 	def __init__(self, name, markup):
 		self.name = name
 		self.markup = markup
+		self.inventory = []
 		self.profit = 0
 
 	def price(self, model):
 		if model in self.inventory:
 			return model.cost * (1 + self.markup)
 
-	def catalog(self, models = [], personal = "\b"):
-		if models == []:
+	def catalog(self, models = (), personal = "\b"):
+		if not models:
 			models = self.inventory
 		if personal != "\b":
 			personal = "just for " + personal
@@ -90,7 +91,7 @@ class Manufacturer(Business):
 
 	"""Defines a bicycle manufacturer"""
 
-	def __init__(self, name, markup, inventory = []):
+	def __init__(self, name, markup):
 		self.inventory = []
 		super(Manufacturer, self).__init__(name, markup)
 
@@ -105,7 +106,7 @@ class Shop(Business):
 
 	"""Defines a bicycle shop"""
 
-	def __init__(self, name, markup = .2, inventory = []):
+	def __init__(self, name, markup = .2):
 		self.inventory = []
 		super(Shop, self).__init__(name, markup)
 
@@ -120,8 +121,8 @@ class Customer(object):
 		self.bicycle = bicycle
 
 	def browse(self, shop):
-		afforable_models = [model for model in shop.inventory if shop.price(model) <= self.kitty]
-		shop.catalog(afforable_models, self.name)
+		affordable_models = [model for model in shop.inventory if shop.price(model) <= self.kitty]
+		shop.catalog(affordable_models, self.name)
 
 	def buy(self, shop, model):
 		if shop.sell(model):

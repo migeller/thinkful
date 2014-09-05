@@ -1,4 +1,4 @@
-from bicycle_classes import Component, Wheel, Frame, Model, Business, Manufacturer, Shop, Customer
+from bicycle_classes import Wheel, Frame, Model, Manufacturer, Shop, Customer
 
 # Frames
 eliminator = Frame("Eliminator", "EX-12", 120, 400, "carbon")
