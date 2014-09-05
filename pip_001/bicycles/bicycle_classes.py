@@ -62,7 +62,7 @@ class Business(object):
 		print ""
 		print "Here's what we've got for sale %s at %s:" % (personal, self.name)
 		for model in models:
-			print "%s: %s %s, total weight: %dg, price %.2f" % (model.itemid, model.manufacturer, model.name, model.weight, self.price(model))
+			print "%s: %s %s, total weight: %dg, price: %.2f" % (model.itemid, model.manufacturer, model.name, model.weight, self.price(model))
 
 	def buy(self, seller, model):
 		if seller.sell(model):
