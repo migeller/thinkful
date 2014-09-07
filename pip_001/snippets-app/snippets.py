@@ -1,7 +1,7 @@
 import logging, csv, argparse, sys
 
 # Set the log output file, and the log level
-logging.basicConfig(filename="output.log", level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(filename="output.log", level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 
 def put(name, snippet, filename):
     """ Store a snippet with an associated name in the CSV file """
