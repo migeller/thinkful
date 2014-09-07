@@ -27,7 +27,9 @@ def get(name, filename):
                 snippet = row[1]
     if snippet is None:
         print "I couldn't find the snippet for that name"
-    logging.debug("Read successful")
+        logging.debug("Read unsuccessful. No snippet for name provided.")
+    else:
+        logging.debug("Read successful")
     return name, snippet, filename
 
 def make_parser():
