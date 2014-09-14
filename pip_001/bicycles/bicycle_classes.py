@@ -44,10 +44,7 @@ class Business(object):
 	def __init__(self, name, markup, inventory = None):
 		self.name = name
 		self.markup = markup
-		if inventory is None:
-			self.inventory = []
-		else:
-			self.inventory = inventory
+		self.inventory = [] if inventory is None else inventory
 		self.profit = 0
 
 	def price(self, model):
@@ -55,8 +52,7 @@ class Business(object):
 			return model.cost * (1 + self.markup)
 
 	def catalog(self, models = None, personal = "\b"):
-		if models is None:
-			models = self.inventory
+		models = self.inventory if models is None else models
 		if personal != "\b":
 			personal = "just for " + personal
 		print ""

@@ -3,27 +3,31 @@ import logging, csv, argparse, sys
 # Set the log output file, and the log level
 logging.basicConfig(filename="output.log", level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 
+def _update_csv_file(name, snippet, update, filename):
+    """ Performs an update by removing the line and rewriting with a modified snippet """
+    logging.debug("Updating snippet to file".format(name, snippet))
+    row_store = []
+    # Get all rows except for the one we're updating
+    with open(filename, "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row[0] != name:
+                row_store.append(row)
+    # Add the row we're updating
+    row_store.append([name, snippet])
+    # Erase the file and write all rows back
+    with open(filename, "w") as f:
+        writer = csv.writer(f)
+        for row in row_store:
+            writer.writerow(row)
+    logging.debug("Update successful")
+
 def put(name, snippet, update, filename):
     """ Store a snippet with an associated name in the CSV file """
     logging.info("Writing {}:{} to {}".format(name, snippet, filename))
     logging.debug("Opening file")
     if update:
-        logging.debug("Updating snippet to file".format(name, snippet))
-        row_store = []
-        # Get all rows except for the one we're updating
-        with open(filename, "r") as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if row[0] != name:
-                    row_store.append(row)
-        # Add the row we're updating
-        row_store.append([name, snippet])
-        # Erase the file and write all rows back
-        with open(filename, "w") as f:
-            writer = csv.writer(f)
-            for row in row_store:
-                writer.writerow(row)
-        logging.debug("Update successful")
+        _update_csv_file(name, snippet, update, filename)
     else:
         with open(filename, "a") as f:
             writer = csv.writer(f)
