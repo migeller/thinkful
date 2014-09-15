@@ -1,4 +1,4 @@
 *.pyc
-secret.*
-*.csv
 *.log
+*.csv
+secret.*
