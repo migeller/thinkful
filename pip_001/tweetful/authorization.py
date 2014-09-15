@@ -18,4 +18,27 @@ def get_request_token():
 def authorize():
 	""" A complete OAuth authentication flow """
 	request_token, request_secret = get_request_token()
-	print request_token, request_secret
+	verifier = get_user_authorization(request_token)
+	access_token, access_secret = get_access_token(request_token, request_secret, verifier)
+	oauth = OAuth1(CLIENT_KEY, client_secret=CLIENT_SECRET, resource_owner_key=access_token, resource_owner_secret=access_secret)
+	return oauth
+
+def get_user_authorization(request_token):
+	"""
+	Redirect the user to authorize the client, and get them to give us the authorization code.
+	"""
+	authorize_url = AUTHORIZE_URL
+	authorize_url = authorize_url.format(request_token=request_token)
+	print "Please go here and authorize: " + authorize_url
+	return raw_input('Please input the verifier: ')
+
+def get_access_token(request_token, request_secret, verifier):
+	"""
+	Get a token which will allows us to make requests to the API
+	"""
+	oauth = OAuth1(CLIENT_KEY, client_secret=CLIENT_SECRET, resource_owner_key=request_token, resource_owner_secret=request_secret, verifier=verifier)
+	response = requests.post(ACCESS_TOKEN_URL, auth=oauth)
+	credentials = urlparse.parse_qs(response.content)
+	access_token = credentials.get('oauth_token')[0]
+	access_secret = credentials.get('oauth_token_secret')[0]
+	return access_token, access_secret
