@@ -36,10 +36,7 @@ def order():
     answers = {}
     for question in questions:
         this_answer = raw_input(questions[question]+' ')
-        if this_answer[0].lower() == "y":
-            answers[question] = True
-        else:
-            answers[question] = False
+        answers[question] = this_answer[0].lower() == "y"
     return answers
 
 def construct(preferences):
@@ -49,7 +46,7 @@ def construct(preferences):
             drink.append(random.choice(ingredients[preference]))
     return drink
 
-if __name__ == '__main__':
+def main():
     print ""
     print "Welcome to ye bar, matey!"
     print ""
@@ -57,4 +54,15 @@ if __name__ == '__main__':
     concoction = construct(preferences)
     print ""
     print "Here's what aye's going to use when makin' yer drink:"
-    print concoction
+    for index, ingredient in enumerate(concoction):
+        if index == len(concoction) - 1:
+            print "And a {}.".format(ingredient)
+            break
+        if ingredient[0].lower in ["a","e", "i", "o", "u"]:
+            article = "An "
+        else:
+            article = "A "
+        print article + ingredient + ","
+
+if __name__ == '__main__':
+    main()
