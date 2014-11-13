@@ -55,14 +55,14 @@ def main():
     print ""
     print "Here's what aye's going to use when makin' yer drink:"
     for index, ingredient in enumerate(concoction):
-        if index == len(concoction) - 1:
-            print "And a {}.".format(ingredient)
-            break
-        if ingredient[0].lower in ["a","e", "i", "o", "u"]:
+        if ingredient[0].lower() in ["a", "e", "i", "o", "u"]:
             article = "An "
         else:
             article = "A "
-        print article + ingredient + ","
+        if index != len(concoction) - 1:
+            print article + ingredient + ","
+        else:
+            print "And " + article.lower() + ingredient + "."
 
 if __name__ == '__main__':
     main()
