@@ -2,7 +2,7 @@
 
 """
 
- MetaCode _____, version 1.0
+ MetaCode Pirate Bartender, version 1.0
  Copyright (c) 2014, MetaCode, Inc. All Rights Reserved.
 
 """
@@ -32,6 +32,9 @@ ingredients = {
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"]
 }
 
+adjectives = ["shivery", "rusty", "blasted", "cantankerous", "frilly", "sandy"]
+nouns = ["fart", "smartphone", "rhinoceros", "smile", "booty", "timbers"]
+
 def order():
     answers = {}
     for question in questions:
@@ -46,23 +49,43 @@ def construct(preferences):
             drink.append(random.choice(ingredients[preference]))
     return drink
 
-def main():
-    print ""
-    print "Welcome to ye bar, matey!"
-    print ""
-    preferences = order()
-    concoction = construct(preferences)
-    print ""
-    print "Here's what aye's going to use when makin' yer drink:"
-    for index, ingredient in enumerate(concoction):
+def drink_name():
+    name = random.choice(adjectives) + " " + random.choice(nouns)
+    return name.title()
+
+def recipe(ingredients):
+    for index, ingredient in enumerate(ingredients):
         if ingredient[0].lower() in ["a", "e", "i", "o", "u"]:
             article = "An "
         else:
             article = "A "
-        if index != len(concoction) - 1:
+        if index != len(ingredients) - 1:
             print article + ingredient + ","
         else:
             print "And " + article.lower() + ingredient + "."
+
+def ask():
+    answer = raw_input("Would ye like another round? ")
+    result = answer[0].lower() == "y"
+    return result
+
+def main():
+    another = True
+    print ""
+    print "Welcome to ye bar, matey!"
+    while another:
+        print ""
+        preferences = order()
+        concoction = construct(preferences)
+        print ""
+        print "Here's what aye's going to use when makin' yer drink:"
+        recipe(concoction)
+        print "Aye call it the \"" + drink_name() + "\"!"
+        print ""
+        another = ask()
+    else:
+        print ""
+        print "Safe travels on yer way home, matey!"
 
 if __name__ == '__main__':
     main()
