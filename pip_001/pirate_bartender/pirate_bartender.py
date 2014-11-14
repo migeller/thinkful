@@ -19,7 +19,7 @@ import random
 questions = {
     "strong": "Do ye like yer drinks strong?",
     "salty": "Do ye like it with a salty tang?",
-    "bitter":  "Are ye a lubber who likes it bitter?",
+    "bitter": "Are ye a lubber who likes it bitter?",
     "sweet": "Would ye like a bit of sweetness with yer poison?",
     "fruity": "Are ye one for a fruity finish?"
 }
@@ -27,7 +27,7 @@ questions = {
 ingredients = {
     "strong": ["glug of rum", "slug of whisky", "splash of gin"],
     "salty": ["olive on a stick", "salt-dusted rim", "rasher of bacon"],
-    "bitter":  ["shake of bitters", "splash of tonic", "twist of lemon peel"],
+    "bitter": ["shake of bitters", "splash of tonic", "twist of lemon peel"],
     "sweet": ["sugar cube", "spoonful of honey", "splash of cola"],
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"]
 }
@@ -54,9 +54,10 @@ def identify(all_preferences):
 def order():
     answers = {}
     for question in questions:
-        this_answer = raw_input(questions[question]+' ')
+        this_answer = raw_input(questions[question] + ' ')
         answers[question] = this_answer[0].lower() == "y"
     return answers
+
 
 def construct(preferences):
     drink = []
@@ -65,9 +66,11 @@ def construct(preferences):
             drink.append(random.choice(ingredients[preference]))
     return drink
 
+
 def drink_name():
     name = random.choice(adjectives) + " " + random.choice(nouns)
     return name.title()
+
 
 def recipe(ingredients):
     for index, ingredient in enumerate(ingredients):
@@ -80,10 +83,12 @@ def recipe(ingredients):
         else:
             print "And " + article.lower() + ingredient + "."
 
+
 def ask():
     answer = raw_input("Would ye like another round? ")
     result = answer[0].lower() == "y"
     return result
+
 
 def main():
     another = True
@@ -102,6 +107,7 @@ def main():
     else:
         print ""
         print "Safe travels on yer way home, matey!"
+
 
 if __name__ == '__main__':
     main()
