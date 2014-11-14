@@ -71,14 +71,24 @@ def ask():
 
 def main():
     another = True
+    all_preferences = {}
     print ""
     print "Welcome to ye bar, matey!"
     while another:
         print ""
-        preferences = order()
+        customer = raw_input("What be yer name, matey? ")
+        if customer in all_preferences:
+            print ""
+            print "Quite the pleasure to serve ye again, " + customer + "."
+            preferences = all_preferences[customer]
+        else:
+            print ""
+            print "Aye see yer a new lubber, {}. Let me ask ye some questions...".format(customer)
+            preferences = order()
+            all_preferences[customer] = preferences
         concoction = construct(preferences)
         print ""
-        print "Here's what aye's going to use when makin' yer drink:"
+        print "{}, here's what aye's going to use when makin' yer drink:".format(customer)
         recipe(concoction)
         print "Aye call it the \"" + drink_name() + "\"!"
         print ""
