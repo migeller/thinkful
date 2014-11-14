@@ -35,6 +35,22 @@ ingredients = {
 adjectives = ["shivery", "rusty", "blasted", "cantankerous", "frilly", "sandy"]
 nouns = ["fart", "smartphone", "rhinoceros", "smile", "booty", "timbers"]
 
+
+def identify(all_preferences):
+    print ""
+    customer = raw_input("What be yer name, matey? ")
+    if customer in all_preferences:
+        print ""
+        print "Quite the pleasure to serve ye again, " + customer + "."
+        preferences = all_preferences[customer]
+    else:
+        print ""
+        print "Aye see yer a new lubber, {}. Let me ask ye some questions...".format(customer)
+        preferences = order()
+        all_preferences[customer] = preferences
+    return customer, preferences, all_preferences
+
+
 def order():
     answers = {}
     for question in questions:
@@ -75,17 +91,7 @@ def main():
     print ""
     print "Welcome to ye bar, matey!"
     while another:
-        print ""
-        customer = raw_input("What be yer name, matey? ")
-        if customer in all_preferences:
-            print ""
-            print "Quite the pleasure to serve ye again, " + customer + "."
-            preferences = all_preferences[customer]
-        else:
-            print ""
-            print "Aye see yer a new lubber, {}. Let me ask ye some questions...".format(customer)
-            preferences = order()
-            all_preferences[customer] = preferences
+        customer, preferences, all_preferences = identify(all_preferences)
         concoction = construct(preferences)
         print ""
         print "{}, here's what aye's going to use when makin' yer drink:".format(customer)
