@@ -78,7 +78,9 @@ def recipe(ingredients):
             article = "An "
         else:
             article = "A "
-        if index != len(ingredients) - 1:
+        if len(ingredients) == 1:
+            print article + ingredient + "."
+        elif index != len(ingredients) - 1:
             print article + ingredient + ","
         else:
             print "And " + article.lower() + ingredient + "."
